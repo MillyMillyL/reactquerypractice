@@ -2,6 +2,7 @@ import { useState } from "react";
 import PostsList1 from "./PostsList1";
 import PostsList2 from "./PostsList2";
 import QueryBasics from "./QueryBasics";
+import Post from "./Post";
 
 function App() {
   const [currentPage, setCurrentPage] = useState(<PostsList1 />);
@@ -18,6 +19,9 @@ function App() {
         </button>
         <button onClick={() => setCurrentPage(<QueryBasics />)}>
           React Query Basics
+        </button>
+        <button onClick={() => setCurrentPage(<Post id={1} />)}>
+          First Post
         </button>
       </div>
       <div>{currentPage}</div>

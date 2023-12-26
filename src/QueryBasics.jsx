@@ -1,18 +1,13 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-
-const POSTS = [
-  { id: 1, title: "Post 1" },
-  { id: 2, title: "Post 2" },
-];
+import { getPosts } from "./api";
+import { addPost } from "./api";
 
 function QueryBasics() {
   const queryClient = useQueryClient();
 
   const postsQuery = useQuery({
     queryKey: ["posts"],
-    queryFn: async () => {
-      return wait(1000).then(() => [...POSTS]);
-    },
+    queryFn: getPosts,
     staleTime: 10000,
     // queryFn: () => Promise.reject("Error message"),
   });
@@ -27,8 +22,7 @@ function QueryBasics() {
   const { isLoading, data: posts, error } = postsQuery;
 
   const newPostMutation = useMutation({
-    mutationFn: (title) =>
-      wait(1000).then(() => POSTS.push({ id: crypto.randomUUID(), title })),
+    mutationFn: addPost,
     onSuccess: () => {
       queryClient.invalidateQueries("posts");
     },
@@ -58,14 +52,3 @@ function QueryBasics() {
 }
 
 export default QueryBasics;
-
-function wait(duration) {
-  return new Promise((resolve) => setTimeout(resolve, duration));
-}
-
-export async function getPosts() {
-  const posts = await wait(1000).then(() => [...POSTS]);
-  return posts;
-}
-
-getPosts();

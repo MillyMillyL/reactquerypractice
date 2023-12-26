@@ -1,10 +1,11 @@
-import { getPosts } from "./QueryBasics";
+import { getPosts } from "./api";
 import { useQuery } from "@tanstack/react-query";
 
 function PostsList1() {
   const postsQuery = useQuery({
     queryKey: ["posts"],
     queryFn: getPosts,
+    // refetchInterval: 1000,
   });
 
   console.log(postsQuery.status);
