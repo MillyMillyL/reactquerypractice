@@ -8,8 +8,6 @@ function PostsList1() {
     // refetchInterval: 1000,
   });
 
-  console.log(postsQuery.status);
-
   if (postsQuery.status === "pending") return <h1>Loading...</h1>;
   if (postsQuery.status === "error")
     return <h1>{JSON.stringify(postsQuery.error)}</h1>;

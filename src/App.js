@@ -17,7 +17,11 @@ function App() {
         <button onClick={() => setCurrentPage(<PostsList2 />)}>
           Posts List 2
         </button>
-        <button onClick={() => setCurrentPage(<QueryBasics />)}>
+        <button
+          onClick={() =>
+            setCurrentPage(<QueryBasics setCurrentPage={setCurrentPage} />)
+          }
+        >
           React Query Basics
         </button>
         <button onClick={() => setCurrentPage(<Post id={1} />)}>

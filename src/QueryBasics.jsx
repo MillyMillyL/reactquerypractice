@@ -1,10 +1,9 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getPosts } from "./api";
-import { addPost } from "./api";
 
-function QueryBasics() {
-  const queryClient = useQueryClient();
+import AddPost from "./AddPost";
 
+function QueryBasics({ setCurrentPage }) {
   const postsQuery = useQuery({
     queryKey: ["posts"],
     queryFn: getPosts,
@@ -21,13 +20,6 @@ function QueryBasics() {
 
   const { isLoading, data: posts, error } = postsQuery;
 
-  const newPostMutation = useMutation({
-    mutationFn: addPost,
-    onSuccess: () => {
-      queryClient.invalidateQueries("posts");
-    },
-  });
-
   if (isLoading) {
     return <h1>Loading</h1>;
   }
@@ -41,12 +33,7 @@ function QueryBasics() {
       {posts.map((post) => (
         <p key={post.id}>{post.title}</p>
       ))}
-      <button
-        disabled={newPostMutation.isPending}
-        onClick={() => newPostMutation.mutate("new")}
-      >
-        Add New
-      </button>
+      <AddPost setCurrentPage={setCurrentPage} />
     </div>
   );
 }

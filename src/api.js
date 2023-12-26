@@ -14,8 +14,12 @@ export async function getPosts() {
   return posts;
 }
 
-export async function addPost(title) {
-  wait(1000).then(() => POSTS.push({ id: crypto.randomUUID(), title }));
+export async function addPost({ title, body }) {
+  const newPost = { id: crypto.randomUUID(), title, body, userId: "abcdefg" };
+
+  wait(1000).then(() => POSTS.push(newPost));
+
+  return newPost;
 }
 
 export async function getPost(id) {
