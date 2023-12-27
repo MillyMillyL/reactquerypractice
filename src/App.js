@@ -1,8 +1,8 @@
 import { useState } from "react";
 import PostsList1 from "./PostsList1";
-import PostsList2 from "./PostsList2";
 import QueryBasics from "./QueryBasics";
 import Post from "./Post";
+import PostListPaginated from "./PostListPaginated";
 
 function App() {
   const [currentPage, setCurrentPage] = useState(<PostsList1 />);
@@ -14,9 +14,7 @@ function App() {
         <button onClick={() => setCurrentPage(<PostsList1 />)}>
           Posts List 1
         </button>
-        <button onClick={() => setCurrentPage(<PostsList2 />)}>
-          Posts List 2
-        </button>
+
         <button
           onClick={() =>
             setCurrentPage(<QueryBasics setCurrentPage={setCurrentPage} />)
@@ -26,6 +24,9 @@ function App() {
         </button>
         <button onClick={() => setCurrentPage(<Post id={1} />)}>
           First Post
+        </button>
+        <button onClick={() => setCurrentPage(<PostListPaginated />)}>
+          Post List Paginated
         </button>
       </div>
       <div>{currentPage}</div>
